@@ -1,68 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>By Tai Mai</title>
   <style>
-    html, body {
+    body, html {
       margin: 0;
       padding: 0;
-      height: 100%;
       overflow: hidden;
       font-family: sans-serif;
     }
-    video {
+    video.bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
       object-fit: cover;
       z-index: -1;
     }
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 0;
-    }
-    .by-tai {
-      position: fixed;
+    .credit {
+      position: absolute;
+      right: 10px;
       bottom: 10px;
-      right: 15px;
       color: white;
-      font-size: 14px;
-      opacity: 0.8;
-      z-index: 1;
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 4px 8px;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
 
-  <!-- VIDEO NỀN -->
-  <video autoplay muted loop>
+  <video class="bg" autoplay loop muted>
     <source src="{{ url_for('static', filename='video/background.mp4') }}" type="video/mp4">
-    Trình duyệt không hỗ trợ video.
   </video>
 
-  <!-- LỚP PHỦ MỜ -->
-  <div class="overlay"></div>
-
-  <!-- DÒNG CHỮ "BY TAI MAI" -->
-  <div class="by-tai">By Tai Mai</div>
-
-  <!-- NHẠC NỀN -->
   <audio id="bgmusic" autoplay loop>
     <source src="{{ url_for('static', filename='audio/music.mp3') }}" type="audio/mp3">
   </audio>
 
-  <!-- CHẠM ĐỂ PHÁT NHẠC (TRÊN ĐIỆN THOẠI) -->
+  <div class="credit">By Tai Mai</div>
+
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const bgm = document.getElementById("bgmusic");
-      document.body.addEventListener("click", function () {
-        bgm.play();
+    document.addEventListener("DOMContentLoaded", () => {
+      const music = document.getElementById("bgmusic");
+      document.body.addEventListener("click", () => {
+        music.play();
       }, { once: true });
     });
   </script>
